@@ -215,7 +215,7 @@ This project is licensed under the **[MIT License](LICENSE)** - see the LICENSE 
 
 <div align="center">
 
-### **Made with ❤️ by [7Na7iD7](https://github.com/7Na7iD7)**
+### **Made with by [7Na7iD7](https://github.com/7Na7iD7)**
 
 *Passionate about making complex concepts accessible through beautiful design*
 

@@ -242,8 +242,6 @@ If this project helped you learn or solve a problem:
 
 **APK file is available in `build\app\outputs\flutter-apk` after running the build command**
 
-**[Get Started](https://github.com/7Na7iD7/nfa_2_dfa#-quick-start-guide) • [Try Online](https://7na7id7.github.io/nfa_2_dfa/) • [Join Community](https://github.com/7Na7iD7/nfa_2_dfa/discussions)**
-
 ---
 
 *"The best way to understand automata is to see them come alive."*

@@ -5,6 +5,7 @@
 
 <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter"/>
 <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart"/>
+<img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=for-the-badge&logo=GitHub%20Pages&logoColor=white" alt="GitHub Pages"/>
 <img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="MIT License"/>
 
 **Transform theoretical concepts into stunning visual experiences**
@@ -214,7 +215,7 @@ This project is licensed under the **[MIT License](LICENSE)** - see the LICENSE 
 
 <div align="center">
 
-### **Made with by [7Na7iD7](https://github.com/7Na7iD7)**
+### **Made with ❤️ by [7Na7iD7](https://github.com/7Na7iD7)**
 
 *Passionate about making complex concepts accessible through beautiful design*
 
@@ -239,7 +240,7 @@ If this project helped you learn or solve a problem:
 
 ### **🚀 Ready to Transform Your Understanding of Automata Theory?**
 
-**[Download Now](https://github.com/7Na7iD7/nfa_2_dfa/releases) • [View Demo](screenshots/) • [Join Community](https://github.com/7Na7iD7/nfa_2_dfa/discussions)**
+**[Get Started](https://github.com/7Na7iD7/nfa_2_dfa#-quick-start-guide) • [Try Online](https://7na7id7.github.io/nfa_2_dfa/) • [Join Community](https://github.com/7Na7iD7/nfa_2_dfa/discussions)**
 
 ---
 

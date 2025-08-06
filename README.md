@@ -43,12 +43,7 @@ This isn't just another academic tool—it's a **revolutionary platform** that b
   - ⚖️ **Balanced** - Speed with detail
   - 🎯 **Optimized** - Maximum efficiency
 
-### 🧮 **Formal Language Operations**
-**NFA Operations:**
-- ➕ Union | ➡️ Concatenation | ♾️ Kleene Star
 
-**DFA Operations:**
-- 🔁 Intersection | 🚫 Complement | 🔀 Product Construction
 
 ### 🔍 **Interactive Testing Suite**
 - **Live String Validation**: Test inputs with real-time feedback
@@ -219,7 +214,7 @@ This project is licensed under the **[MIT License](LICENSE)** - see the LICENSE 
 
 <div align="center">
 
-### **Made with ❤️ by [7Na7iD7](https://github.com/7Na7iD7)**
+### **Made with by [7Na7iD7](https://github.com/7Na7iD7)**
 
 *Passionate about making complex concepts accessible through beautiful design*
 

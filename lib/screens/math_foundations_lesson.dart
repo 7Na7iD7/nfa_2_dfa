@@ -6,51 +6,6 @@ import 'dart:ui';
 import '../models/math_content_data.dart';
 import '../widgets/math_lesson_widgets.dart';
 
-// --- کلاس‌های جایگزین برای اجرای کد ---
-// از آنجایی که فایل‌های مدل و ویجت در دسترس نبود، کلاس‌های جایگزین ساده‌ای برای اجرای کد ایجاد شد.
-// در پروژه اصلی باید از فایل‌های خودتان استفاده کنید.
-
-class ContentBlock {
-  final String theory;
-  ContentBlock({required this.theory});
-}
-
-class SectionContent {
-  final List<ContentBlock> content;
-  SectionContent({required this.content});
-}
-
-class MathContentData {
-  static List<SectionContent> lessonSections = List.generate(
-    7,
-        (index) => SectionContent(content: [
-      ContentBlock(theory: 'این یک متن تئوری برای بخش ${index + 1} است.'),
-      ContentBlock(theory: 'این دومین نکته تئوری برای این بخش است.'),
-    ]),
-  );
-}
-
-class ContentCard extends StatelessWidget {
-  final ContentBlock content;
-  final Color color;
-
-  const ContentCard({
-    super.key,
-    required this.content,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      content.theory,
-      style: TextStyle(color: color, fontSize: 16),
-    );
-  }
-}
-// --- پایان کلاس‌های جایگزین ---
-
-
 class MathFoundationsLesson extends StatefulWidget {
   const MathFoundationsLesson({super.key});
 
@@ -329,17 +284,42 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
 
                         // Content Cards
                         if (sectionContentData != null)
-                          ...sectionContentData.content.asMap().entries.map((entry) {
-                            return _buildAnimatedContentCard(
-                              entry.value,
-                              section,
-                              entry.key,
-                              mediaQuery,
+                          ...sectionContentData.content.theory.asMap().entries.map((entry) {
+                            return AnimatedFadeIn(
+                              delay: Duration(milliseconds: 200 + (entry.key * 150)),
+                              child: ContentCard(
+                                content: entry.value,
+                                color: section.primaryColor,
+                              ),
                             );
                           }).toList(),
 
+                        // Display Example Cards
+                        if (sectionContentData != null && sectionContentData.content.examples.isNotEmpty)
+                          ...sectionContentData.content.examples.asMap().entries.map((entry) {
+                            return AnimatedFadeIn(
+                              delay: Duration(milliseconds: 300 + entry.key * 200),
+                              child: ExampleCard(
+                                example: entry.value,
+                                color: Colors.amber,
+                              ),
+                            );
+                          }).toList(),
+
+                        const SizedBox(height: 32),
+
+                        // Display the Quiz View
+                        if (sectionContentData != null && sectionContentData.content.questions.isNotEmpty)
+                          AnimatedFadeIn(
+                            delay: const Duration(milliseconds: 800),
+                            child: QuizView(
+                              questions: sectionContentData.content.questions,
+                              color: Colors.green.shade400,
+                            ),
+                          ),
+
                         // Interactive Elements
-                        _buildInteractiveElements(section, mediaQuery),
+                        _buildInteractiveElements(section),
                       ],
                     );
                   },
@@ -579,53 +559,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
     );
   }
 
-  Widget _buildAnimatedContentCard(
-      ContentBlock content,
-      EnhancedLessonSection section,
-      int index,
-      MediaQueryData mediaQuery,
-      ) {
-    final delay = Duration(milliseconds: 200 + (index * 150));
-
-    return TweenAnimationBuilder(
-      duration: delay,
-      tween: Tween<double>(begin: 0.0, end: 1.0),
-      builder: (context, double value, child) {
-        return Transform.translate(
-          offset: Offset(0, 30 * (1 - value)),
-          child: Opacity(
-            opacity: value,
-            child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.only(bottom: 24),
-              padding: const EdgeInsets.all(28),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.95),
-                borderRadius: BorderRadius.circular(24),
-                border: Border.all(
-                  color: section.primaryColor.withOpacity(0.2),
-                  width: 2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: section.primaryColor.withOpacity(0.15),
-                    blurRadius: 30,
-                    offset: const Offset(0, 15),
-                  ),
-                ],
-              ),
-              child: ContentCard(
-                content: content,
-                color: section.primaryColor,
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildInteractiveElements(EnhancedLessonSection section, MediaQueryData mediaQuery) {
+  Widget _buildInteractiveElements(EnhancedLessonSection section) {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(top: 32),

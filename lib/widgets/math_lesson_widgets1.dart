@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// ❗ این ایمپورت برای دسترسی به مدل داده QuizQuestion ضروری است
 import '/models/math_content_data1.dart';
 
-// 🎨 رنگ‌های قالب
 class AppColors {
   static const Color primaryBlue = Color(0xFF2196F3);
   static const Color secondaryYellow = Color(0xFFFFC107);
@@ -17,7 +15,6 @@ class AppColors {
   static const Color darkGray = Color(0xFF424242);
 }
 
-// 📱 ویجت اصلی درس
 class MathLessonWidget extends StatefulWidget {
   final String lessonTitle;
   final String lessonSubtitle;
@@ -92,7 +89,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
     );
   }
 
-  // 📊 نوار بالا
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -163,7 +159,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
     );
   }
 
-  // 📊 نوار پیشرفت
   Widget _buildProgressBar() {
     final progress = (_currentPage + 1) / (widget.sections.length + 1);
     return Column(
@@ -187,7 +182,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
     );
   }
 
-  // 🎯 نمایش اهداف یادگیری
   Widget _buildObjectivesView() {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -309,7 +303,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
     );
   }
 
-  // 📱 محتوای درس
   Widget _buildLessonContent() {
     return PageView.builder(
       controller: _pageController,
@@ -325,7 +318,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
     );
   }
 
-  // 🎮 نوار کنترل
   Widget _buildControlBar() {
     if (_showObjectives) return const SizedBox.shrink();
 
@@ -456,7 +448,6 @@ class _MathLessonWidgetState extends State<MathLessonWidget>
   }
 }
 
-// 🎯 کارت هدف یادگیری
 class ObjectiveCard extends StatefulWidget {
   final String objective;
   final int index;
@@ -579,7 +570,6 @@ class _ObjectiveCardState extends State<ObjectiveCard>
   }
 }
 
-// 📝 ویجت بخش درس
 class LessonSectionWidget extends StatefulWidget {
   final String id;
   final String title;
@@ -809,7 +799,6 @@ class _LessonSectionWidgetState extends State<LessonSectionWidget>
   }
 }
 
-// 💬 ویجت پیام گفتگو
 class DialogueMessageWidget extends StatefulWidget {
   final String speaker;
   final String avatar;
@@ -1078,9 +1067,7 @@ class _DialogueMessageWidgetState extends State<DialogueMessageWidget>
   }
 }
 
-// 🧪 ویجت تست تعاملی (نسخه آپدیت شده)
 class InteractiveQuizWidget extends StatefulWidget {
-  // --- تغییر ۱: پاس دادن کل آبجکت سوال ---
   final QuizQuestion questionData;
   final Function(bool isCorrect)? onAnswered;
 
@@ -1147,7 +1134,6 @@ class _InteractiveQuizWidgetState extends State<InteractiveQuizWidget>
   void _submitAnswer() {
     if (_selectedOption == null || _showResult) return;
 
-    // --- تغییر ۲: استفاده از داده‌های آبجکت ---
     _isCorrect = _selectedOption == widget.questionData.correctAnswer;
 
     setState(() {
@@ -1177,7 +1163,6 @@ class _InteractiveQuizWidgetState extends State<InteractiveQuizWidget>
     _shakeController.reset();
   }
 
-  // --- تغییر ۳: ویجت جدید برای نمایش درجه سختی ---
   Widget _buildDifficultyIndicator(int difficulty) {
     final List<Widget> stars = List.generate(
       3,
@@ -1288,7 +1273,6 @@ class _InteractiveQuizWidgetState extends State<InteractiveQuizWidget>
 
           const SizedBox(height: 12),
 
-          // --- تغییر ۴: نمایش سختی و امتیاز سوال ---
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
@@ -1320,7 +1304,6 @@ class _InteractiveQuizWidgetState extends State<InteractiveQuizWidget>
           ),
 
           const SizedBox(height: 16),
-          // متن سؤال
           if (widget.questionData.context.isNotEmpty) ...[
             Container(
               width: double.infinity,

@@ -29,8 +29,8 @@ class _InteractiveDialogueLessonScreenState
   @override
   void initState() {
     super.initState();
-    _setupAnimations(); // ابتدا انیمیشن‌ها را setup کنید
-    _initializeLesson(); // سپس درس را initialize کنید
+    _setupAnimations();
+    _initializeLesson();
   }
 
   @override
@@ -55,7 +55,7 @@ class _InteractiveDialogueLessonScreenState
   void _initializeLesson() {
     _lessonStartTime = DateTime.now();
     _updateProgress();
-    _progressAnimationController.forward(); // انیمیشن را اینجا شروع کنید
+    _progressAnimationController.forward();
   }
 
   Future<void> _saveProgress() async {
@@ -103,7 +103,6 @@ class _InteractiveDialogueLessonScreenState
   void _updateProgress() {
     double currentProgress = (_currentSectionIndex + 1) / MathContentData.sections.length;
 
-    // چک کنید که انیمیشن initialize شده باشد
     if (_progressAnimationController.isCompleted || _progressAnimationController.isDismissed) {
       _progressAnimation = Tween<double>(
           begin: _progressAnimation.value,
@@ -114,7 +113,6 @@ class _InteractiveDialogueLessonScreenState
       ));
       _progressAnimationController.forward(from: 0.0);
     } else {
-      // اگر انیمیشن در حال اجرا است، فقط مقدار نهایی را تغییر دهید
       _progressAnimation = Tween<double>(
           begin: 0.0,
           end: currentProgress

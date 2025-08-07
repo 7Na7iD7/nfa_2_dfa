@@ -4,6 +4,8 @@ import 'dart:math' as math;
 import 'dart:ui';
 import '../models/math_content_data.dart';
 import '../widgets/math_lesson_widgets.dart';
+// وارد کردن فایل صفحه جدید
+import 'interactive_dialogue_lesson_screen.dart';
 
 class MathFoundationsLesson extends StatefulWidget {
   const MathFoundationsLesson({super.key});
@@ -211,6 +213,16 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
     HapticFeedback.selectionClick();
   }
 
+  // *** کد جدید برای هدایت به صفحه درس تعاملی ***
+  void _navigateToInteractiveLesson() {
+    HapticFeedback.heavyImpact();
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const InteractiveDialogueLessonScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -225,6 +237,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
           children: [
             _buildFullScreenContent(isDark, mediaQuery),
             if (_showProgress) _buildProgressIndicator(mediaQuery),
+            // *** قرار دادن دکمه‌ها در یک Stack برای مدیریت موقعیت ***
             _buildNavigationControls(isDark),
             _buildFloatingMenu(isDark, mediaQuery),
           ],
@@ -262,10 +275,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
       height: mediaQuery.size.height,
       child: Stack(
         children: [
-          // Animated Background
           _buildAnimatedBackground(section, isDark),
-
-          // Content
           SafeArea(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -276,12 +286,8 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                   builder: (context, child) {
                     return Column(
                       children: [
-                        // Header Section
                         _buildEnhancedHeader(section, mediaQuery),
-
                         const SizedBox(height: 40),
-
-                        // Content Cards
                         if (sectionContentData != null)
                           ...sectionContentData.content.theory.asMap().entries.map((entry) {
                             return AnimatedFadeIn(
@@ -292,8 +298,6 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                               ),
                             );
                           }).toList(),
-
-                        // Display Example Cards
                         if (sectionContentData != null && sectionContentData.content.examples.isNotEmpty)
                           ...sectionContentData.content.examples.asMap().entries.map((entry) {
                             return AnimatedFadeIn(
@@ -304,10 +308,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                               ),
                             );
                           }).toList(),
-
                         const SizedBox(height: 32),
-
-                        // Display the Quiz View
                         if (sectionContentData != null && sectionContentData.content.questions.isNotEmpty)
                           AnimatedFadeIn(
                             delay: const Duration(milliseconds: 800),
@@ -316,8 +317,6 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                               color: Colors.green.shade400,
                             ),
                           ),
-
-                        // Interactive Elements
                         _buildInteractiveElements(section),
                       ],
                     );
@@ -699,14 +698,36 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
     );
   }
 
+  // *** ویجت کنترل‌های ناوبری بروزرسانی شد ***
   Widget _buildNavigationControls(bool isDark) {
     return Positioned(
       bottom: 30,
+      left: 20,
       right: 20,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Menu Button
+          // دکمه جدید "امتحانش کن" در سمت چپ
+          FloatingActionButton.extended(
+            onPressed: _navigateToInteractiveLesson,
+            heroTag: 'interactive_lesson_button', // تگ منحصر به فرد
+            backgroundColor: const Color(0xFF4CAF50), // رنگ سبز برای تمایز
+            elevation: 8,
+            label: const Text(
+              'امتحانش کن',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+            icon: const Icon(
+              Icons.quiz_outlined,
+              color: Colors.white,
+            ),
+          ),
+
+          // دکمه قبلی "فهرست" در سمت راست
           AnimatedBuilder(
             animation: _fabController,
             builder: (context, child) {
@@ -714,6 +735,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                 scale: 1.0 + (_fabController.value * 0.1),
                 child: FloatingActionButton.extended(
                   onPressed: _toggleMenu,
+                  heroTag: 'menu_button', // تگ منحصر به فرد
                   backgroundColor: _sections[_currentSection].primaryColor,
                   elevation: 8,
                   label: Text(
@@ -726,7 +748,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                   ),
                   icon: AnimatedRotation(
                     duration: const Duration(milliseconds: 300),
-                    turns: _isMenuOpen ? 0.13 : 0, // for a close 'x' icon
+                    turns: _isMenuOpen ? 0.13 : 0,
                     child: Icon(
                       _isMenuOpen ? Icons.close : Icons.menu_book,
                       color: Colors.white,
@@ -778,7 +800,6 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
             ),
             child: Column(
               children: [
-                // Header
                 Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
@@ -817,7 +838,6 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                     ],
                   ),
                 ),
-                // Content List
                 Expanded(
                   child: ListView.builder(
                     padding: const EdgeInsets.all(16),
@@ -858,7 +878,6 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                               ),
                               child: Row(
                                 children: [
-                                  // Status Indicator
                                   Container(
                                     width: 50,
                                     height: 50,
@@ -892,10 +911,7 @@ class _MathFoundationsLessonState extends State<MathFoundationsLesson>
                                       ),
                                     ),
                                   ),
-
                                   const SizedBox(width: 16),
-
-                                  // Content
                                   Expanded(
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1045,11 +1061,9 @@ class GeometricPatternPainter extends CustomPainter {
         final center = Offset(x, y);
         final radius = 30.0 * progress;
 
-        // Draw animated circles
         paint.color = color.withOpacity(opacity);
         canvas.drawCircle(center, radius, paint);
 
-        // Draw connecting lines
         if (x + spacing < size.width) {
           paint.color = color.withOpacity(opacity * 0.5);
           canvas.drawLine(

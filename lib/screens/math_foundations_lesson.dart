@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'dart:ui';
-// این فایل‌ها باید در پروژه شما وجود داشته باشند
 import '../models/math_content_data.dart';
 import '../widgets/math_lesson_widgets.dart';
 

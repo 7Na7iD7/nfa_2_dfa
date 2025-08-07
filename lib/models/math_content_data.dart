@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-// نام کلاس وارد شده با نام کلاس در فایل دیگر مطابقت داشته باشد
 import 'extended_math_questions.dart';
 
 class MathContentData {

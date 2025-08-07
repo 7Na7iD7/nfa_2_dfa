@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:math' as math;
 import 'dart:ui';
-
-// اطمینان حاصل کنید که این فایل در پروژه شما به درستی آدرس‌دهی شده است
-// این فایل باید در مسیر 'models/math_content_data.dart' باشد
 import '../models/math_content_data.dart';
 
 
-// ویجت انیمیشن پیشرفته برای ورود تدریجی عناصر
 class AnimatedFadeIn extends StatefulWidget {
   final Widget child;
   final Duration delay;
@@ -90,7 +86,6 @@ class _AnimatedFadeInState extends State<AnimatedFadeIn>
   }
 }
 
-// کارت محتوای شیشه‌ای (Glassmorphism) برای نمایش تئوری
 class ContentCard extends StatefulWidget {
   final ContentBlock content;
   final Color color;

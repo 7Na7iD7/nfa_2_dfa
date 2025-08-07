@@ -671,7 +671,6 @@ class EnhancedQuizQuestions {
     return quiz;
   }
 
-  // متد برای تولید آزمون تخصصی برای دانشجویان علوم کامپیوتر
   static List<QuizQuestion> generateCSFocusedQuiz({int maxQuestions = 15}) {
     final languageQuestions = getAdvancedLanguageGrammarQuestions();
     final functionQuestions = getAdvancedFunctionQuestions();
@@ -679,10 +678,10 @@ class EnhancedQuizQuestions {
     final challengeQuestions = getChallengeQuestions();
 
     final focusedQuiz = <QuizQuestion>[];
-    focusedQuiz.addAll(languageQuestions.take(6)); // 40% زبان و گرامر
-    focusedQuiz.addAll(functionQuestions.take(4)); // 27% توابع
-    focusedQuiz.addAll(setQuestions.take(3)); // 20% مجموعه‌ها
-    focusedQuiz.addAll(challengeQuestions.take(2)); // 13% چالشی
+    focusedQuiz.addAll(languageQuestions.take(6));
+    focusedQuiz.addAll(functionQuestions.take(4));
+    focusedQuiz.addAll(setQuestions.take(3));
+    focusedQuiz.addAll(challengeQuestions.take(2));
 
     focusedQuiz.shuffle();
     return focusedQuiz.take(maxQuestions).toList();
@@ -730,7 +729,7 @@ class EnhancedQuizQuestions {
     };
     stats['section_distribution'] = sectionStats;
 
-    stats['previous_questions'] = {'total': 0}; // Placeholder
+    stats['previous_questions'] = {'total': 0};
     stats['grand_total'] = totalAdvanced;
 
     return stats;

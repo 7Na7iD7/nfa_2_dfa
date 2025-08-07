@@ -4,6 +4,7 @@ import 'dart:math' as math;
 import 'home_screen.dart';
 import 'operations_screen.dart';
 import 'settings_screen.dart';
+import 'math_foundations_lesson.dart';
 
 class MainHubScreen extends StatefulWidget {
   const MainHubScreen({super.key});
@@ -21,6 +22,7 @@ class _MainHubScreenState extends State<MainHubScreen>
   late List<AnimationController> _iconControllers;
   late List<AnimationController> _particleControllers;
 
+  // [MODIFIED] اضافه کردن آیتم جدید به لیست ناوبری
   final List<NavigationItem> _navigationItems = [
     NavigationItem(
       icon: Icons.dashboard_outlined,
@@ -57,6 +59,19 @@ class _MainHubScreenState extends State<MainHubScreen>
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         stops: [0.0, 0.25, 0.75, 1.0],
+      ),
+      badgeCount: 0,
+    ),
+    NavigationItem(
+      icon: Icons.school_outlined,
+      activeIcon: Icons.school_rounded,
+      morphIcon: Icons.auto_stories_rounded,
+      label: 'مفاهیم ریاضی',
+      page: const MathFoundationsLesson(),
+      gradient: const LinearGradient(
+        colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
       ),
       badgeCount: 0,
     ),
